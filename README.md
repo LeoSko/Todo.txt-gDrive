@@ -25,7 +25,7 @@ Todo.txt + gDrive is a tool for managing TODO lists and sync them with Google Dr
 ##Autors
 
 Students of SPb ETU, group 2381
-- Skorospelov Leonid ([LeoSko](https://github.com/LeoSko))
-- Fedorov Evgeniy ([Fedorov013](https://github.com/Fedorov013))
-- Chegesov Denis ([blacksonik](https://github.com/blacksonik))
-- Razdobreev Nikita ([Zo0MER](https://github.com/Zo0MER))
+- Skorospelov Leonid ([LeoSko](https://github.com/LeoSko)) - manager of project
+- Fedorov Evgeniy ([Fedorov013](https://github.com/Fedorov013)) - documentation manager
+- Chegesov Denis ([blacksonik](https://github.com/blacksonik)) - designer
+- Razdobreev Nikita ([Zo0MER](https://github.com/Zo0MER)) - architector
