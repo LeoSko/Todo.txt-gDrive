@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         }
         catch (IOException e)
         {
-            //if we can't create file then just quit no matter what for now
+            //if we can't create file then just quit no matter what for now...
             Toast.makeText(appcntxt, CANT_CREATE_FILE, Toast.LENGTH_LONG);
             finish();
         }
