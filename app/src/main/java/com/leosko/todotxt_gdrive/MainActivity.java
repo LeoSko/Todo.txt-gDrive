@@ -22,7 +22,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity
 {
     public static final String CANT_CREATE_FILE = "Cannot create file";
-    private Model model;
+    private Model model = new Model();
     private SharedPreferences prefs;
     private LocalFileSync lfs;
     private static Context appcntxt;
