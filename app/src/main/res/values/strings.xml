@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Todo.txt-gDrive</string>
     <string name="action_settings">Settings</string>
+    <string-array name="list_item_actions">
+        <item>Edit</item>
+        <item>Delete</item>
+        </string-array>
 </resources>

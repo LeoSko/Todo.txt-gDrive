@@ -50,4 +50,9 @@ public class Task
     {
         text = newStr;
     }
+
+    public String getText()
+    {
+        return text;
+    }
 }

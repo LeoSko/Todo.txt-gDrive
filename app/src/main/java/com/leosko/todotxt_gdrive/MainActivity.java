@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.leosko.todotxt_gdrive.com.leosko.todotxt_gdrive.model.LocalFileSync;
@@ -58,6 +59,9 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+        final TaskListAdapter adapter = new TaskListAdapter(this, R.id.TaskListView, model.getTasks());
+        final ListView taskListView = (ListView) findViewById(R.id.TaskListView);
+        taskListView.setAdapter(adapter);
     }
 
     public static Context getAppcntxt()
