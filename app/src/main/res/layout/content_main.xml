@@ -12,17 +12,26 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main"
     tools:context=".MainActivity">
-
+    <!--com.fortysevendeg.swipelistview.SwipeListView
+        xmlns:swipe="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/TaskListView"
+        android:listSelector="#00FF0000"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        swipe:swipeFrontView="@+id/list_item"
+        swipe:swipeBackView="@+id/list_item_back"
+        swipe:swipeActionLeft="reveal"
+        swipe:swipeActionRight="reveal"
+        swipe:swipeMode="both"
+        swipe:swipeCloseAllItemsWhenMoveList="true"
+        swipe:swipeOpenOnLongPress="true"
+        swipe:swipeAnimationTime="100"
+        swipe:swipeOffsetLeft="70dp"
+        swipe:swipeOffsetRight="70dp"/-->
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/TaskListView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        tools:listitem="@layout/listitem" />
-
+        tools:listitem="@layout/list_item"
+        />
 </RelativeLayout>

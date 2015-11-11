@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.leosko.todotxt_gdrive.com.leosko.todotxt_gdrive.model.Task;
@@ -28,11 +29,20 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
 
         Task task = getItem(position);
 
-        View rowView = inflater.inflate(R.layout.listitem, parent, false);
+        View rowView = inflater.inflate(R.layout.list_item, parent, false);
         TextView descriptionView = (TextView) rowView.findViewById(R.id.description_view);
+        TextView dateView = (TextView) rowView.findViewById(R.id.date_view);
+        //CheckBox cb = (CheckBox) rowView.findViewById(R.id.completion_check_box);
+        //cb.setChecked(task.isComplete());
+        dateView.setText(task.getDate());
         descriptionView.setText(task.getText());
 
         return rowView;
     }
-    
+
+    @Override
+    public boolean isEnabled(int position)
+    {
+        return (getItem(position).isComplete());
+    }
 }

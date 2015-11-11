@@ -1,19 +1,23 @@
 package com.leosko.todotxt_gdrive;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.fortysevendeg.swipelistview.SwipeListView;
+import com.fortysevendeg.swipelistview.SwipeListViewListener;
+import com.fortysevendeg.swipelistview.SwipeListViewTouchListener;
 import com.leosko.todotxt_gdrive.com.leosko.todotxt_gdrive.model.LocalFileSync;
 import com.leosko.todotxt_gdrive.com.leosko.todotxt_gdrive.model.Model;
 
@@ -22,9 +26,10 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity
 {
     public static final String CANT_CREATE_FILE = "Cannot create file";
-    private Model model = new Model();
+    public static Model model;
+    public static LocalFileSync lfs;
     private SharedPreferences prefs;
-    private LocalFileSync lfs;
+    private TaskListItemClickListener tlicl;
     private static Context appcntxt;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         appcntxt = getApplicationContext();
+        model = new Model();
+        tlicl = new TaskListItemClickListener();
         prefs = PreferenceManager.getDefaultSharedPreferences(appcntxt);
         try
         {
@@ -40,11 +47,26 @@ public class MainActivity extends AppCompatActivity
         catch (IOException e)
         {
             //if we can't create file then just quit no matter what for now...
-            Toast.makeText(appcntxt, CANT_CREATE_FILE, Toast.LENGTH_LONG);
+            Toast.makeText(appcntxt, CANT_CREATE_FILE, Toast.LENGTH_LONG).show();
             finish();
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //SwipeListView taskListView = (SwipeListView) findViewById(R.id.TaskListView);
+
+        ListView taskListView = (ListView) findViewById(R.id.TaskListView);
+        taskListView.setAdapter(model.getAdapter());
+        taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Toast.makeText(appcntxt, "Item", Toast.LENGTH_LONG).show();
+            }
+        });
+        //taskListView.setOnItemClickListener(tlicl);
+        taskListView.setOnItemLongClickListener(tlicl);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
@@ -53,15 +75,14 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 //Create new task
-
+                TaskEditDialog ted = new TaskEditDialog(MainActivity.this, null);
+                AlertDialog.Builder builder = ted.createTaskEditDialog();
+                // create an alert dialog
+                final AlertDialog alertD = builder.create();
+                alertD.show();
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
-
-
-        final TaskListAdapter adapter = new TaskListAdapter(this, R.id.TaskListView, model.getTasks());
-        final ListView taskListView = (ListView) findViewById(R.id.TaskListView);
-        taskListView.setAdapter(adapter);
     }
 
     public static Context getAppcntxt()

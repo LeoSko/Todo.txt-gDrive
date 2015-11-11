@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="2dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priority"
+                android:id="@+id/textViewPriority"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_column="0"
+                android:layout_gravity="left"/>
+
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerPriority"
+                android:layout_weight="2"
+                android:spinnerMode="dropdown"
+                android:layout_column="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/project"
+                android:id="@+id/textViewProject"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_column="0"
+                android:layout_gravity="left"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextProject"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.10"
+                android:inputType="textAutoComplete"
+                android:layout_column="1"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/context"
+                android:id="@+id/textViewContext"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_column="0"
+                android:layout_gravity="left"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextContext"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.10"
+                android:inputType="textAutoComplete"
+                android:layout_column="1"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/editText"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.10"
+        android:inputType="text"/>
+
+</LinearLayout>

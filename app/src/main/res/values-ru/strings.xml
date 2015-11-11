@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Настройки</string>
+    <string name="priority">Приоритет</string>
+    <string name="task_description">Описание</string>
+    <string name="task_date">Дата</string>
+    <string name="date">Дата</string>
+    <string name="project">Проект</string>
+    <string name="context">Контекст</string>
+    <string name="delete_task">Delete task</string>
+    <string name="edit_task">Edit task</string>
+    <string name="complete_task">Complete task</string>
+</resources>
