@@ -7,7 +7,7 @@
     <string name="date">Дата</string>
     <string name="project">Проект</string>
     <string name="context">Контекст</string>
-    <string name="delete_task">Delete task</string>
-    <string name="edit_task">Edit task</string>
-    <string name="complete_task">Complete task</string>
+    <string name="delete_task">Удалить задачу</string>
+    <string name="edit_task">Редактировать</string>
+    <string name="complete_task">Завершить</string>
 </resources>

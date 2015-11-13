@@ -15,11 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.fortysevendeg.swipelistview.SwipeListView;
-import com.fortysevendeg.swipelistview.SwipeListViewListener;
-import com.fortysevendeg.swipelistview.SwipeListViewTouchListener;
-import com.leosko.todotxt_gdrive.com.leosko.todotxt_gdrive.model.LocalFileSync;
-import com.leosko.todotxt_gdrive.com.leosko.todotxt_gdrive.model.Model;
+import com.leosko.todotxt_gdrive.model.LocalFileSync;
+import com.leosko.todotxt_gdrive.model.Model;
 
 import java.io.IOException;
 
@@ -28,9 +25,10 @@ public class MainActivity extends AppCompatActivity
     public static final String CANT_CREATE_FILE = "Cannot create file";
     public static Model model;
     public static LocalFileSync lfs;
-    private SharedPreferences prefs;
+    public static SharedPreferences prefs;
     private TaskListItemClickListener tlicl;
     private static Context appcntxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -57,15 +55,7 @@ public class MainActivity extends AppCompatActivity
 
         ListView taskListView = (ListView) findViewById(R.id.TaskListView);
         taskListView.setAdapter(model.getAdapter());
-        taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                Toast.makeText(appcntxt, "Item", Toast.LENGTH_LONG).show();
-            }
-        });
-        //taskListView.setOnItemClickListener(tlicl);
+        taskListView.setOnItemClickListener(tlicl);
         taskListView.setOnItemLongClickListener(tlicl);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -80,6 +70,7 @@ public class MainActivity extends AppCompatActivity
                 // create an alert dialog
                 final AlertDialog alertD = builder.create();
                 alertD.show();
+                Toast.makeText(appcntxt, "FAB clicks!", Toast.LENGTH_LONG).show();
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
