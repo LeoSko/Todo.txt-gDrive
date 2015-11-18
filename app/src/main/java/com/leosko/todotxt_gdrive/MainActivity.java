@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.leosko.todotxt_gdrive.model.LocalFileSync;
 import com.leosko.todotxt_gdrive.model.Model;
 
@@ -51,9 +52,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //SwipeListView taskListView = (SwipeListView) findViewById(R.id.TaskListView);
-
         ListView taskListView = (ListView) findViewById(R.id.TaskListView);
+
+        //ListView taskListView = (ListView) findViewById(R.id.TaskListView);
         taskListView.setAdapter(model.getAdapter());
         taskListView.setOnItemClickListener(tlicl);
         taskListView.setOnItemLongClickListener(tlicl);
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity
                 // create an alert dialog
                 final AlertDialog alertD = builder.create();
                 alertD.show();
-                Toast.makeText(appcntxt, "FAB clicks!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(appcntxt, "FAB clicks!", Toast.LENGTH_LONG).show();
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });

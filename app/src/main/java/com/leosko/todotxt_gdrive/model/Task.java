@@ -1,60 +1,10 @@
 package com.leosko.todotxt_gdrive.model;
 
-import android.util.StringBuilderPrinter;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.regex.*;
-
 /**
  * Created by LeoSko on 28.10.2015.
  */
 public class Task
 {
-    /*
-    Rule 1: If priority exists, it ALWAYS appears first.
-
-The priority is an uppercase character from A-Z enclosed in parentheses and followed by a space.
-
-For example, this is a task with an A priority:
-
-(A) Call Mom
-
-These tasks have no priority:
-
-    Really gotta call Mom (A) @phone @someday
-    (b) Get back to the boss
-    (B)->Submit TPS report
-
-    Rule 2: A task’s creation date may optionally appear directly after priority and a space.
-
-If there is no priority, the creation date appears first. If the creation date exists, it should be in the format YYYY-MM-DD.
-
-These tasks have creation dates:
-
-    2011-03-02 Document +TodoTxt task format
-    (A) 2011-03-02 Call Mom
-This task doesn’t have a creation date:
-
-(A) Call Mom 2011-03-02
-
-    Rule 3: Contexts and Projects may appear anywhere in the line after priority/prepended date.
-
-A context is preceded by a single space and an @ sign. A project is preceded by a single space and a plus + sign. A project or context contains any non-whitespace character. A task may have zero, one, or more than one projects and contexts included in it.
-
-For example, this task is part of the +Family and +PeaceLoveAndHappiness projects as well as the @iphone and @phone contexts:
-
-(A) Call Mom +Family +PeaceLoveAndHappiness @iphone @phone
-
-This task has no contexts in it:
-
-Email SoAndSo at soandso@example.com
-
-This task has no projects in it:
-
-Learn how to add 2+2
-    */
-
     public static final String TASK_DEFAULT_TEXT = "New task";
     public static final String TASK_COMPLETED_FLAG = "x ";
     public static final String TASK_HAS_PRIOR_REGEX = "\\d{4}-\\d{2}-\\d{2}";
@@ -82,7 +32,7 @@ Learn how to add 2+2
         }
         if (!_project.isEmpty())
         {
-            String[] projects = _context.split(" ");
+            String[] projects = _project.split(" ");
             for (String s : projects)
             {
                 resproject += "+" + s + " ";
@@ -102,7 +52,7 @@ Learn how to add 2+2
                 res += s + " ";
             }
         }
-        return res.substring(0, res.length() - 1);
+        return res.substring(0, Math.max(0, res.length() - 1));
     }
 
     public String getContexts()
@@ -115,14 +65,14 @@ Learn how to add 2+2
                 res += s + " ";
             }
         }
-        return res.substring(0, res.length() - 1);
+        return res.substring(0, Math.max(0, res.length() - 1));
     }
 
     public void setCreationDate(String date)
     {
-        if (hasDate())
+        if (hasCreationDate())
         {
-            text.replace(getDate(), date);
+            text.replace(getCreationDate(), date);
         }
         else
         {
@@ -189,7 +139,7 @@ Learn how to add 2+2
         }
     }
 
-    public boolean hasDate()
+    public boolean hasCreationDate()
     {
         // TODO (LeoSko) maybe check date for validity somehow?
         /*
@@ -236,7 +186,7 @@ Learn how to add 2+2
         {
             start += 2;
         }
-        if (hasDate())
+        if (hasCreationDate())
         {
             start += DATE_LENGTH;
         }
@@ -251,9 +201,9 @@ Learn how to add 2+2
         return res.substring(0, res.length() - 1);
     }
 
-    public String getDate()
+    public String getCreationDate()
     {
-        if (hasDate())
+        if (hasCreationDate())
         {
             int start = 0;
             if (hasPriority())

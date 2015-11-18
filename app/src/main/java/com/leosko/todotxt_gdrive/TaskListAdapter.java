@@ -1,7 +1,6 @@
 package com.leosko.todotxt_gdrive;
 
 import android.content.Context;
-import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.leosko.todotxt_gdrive.model.Task;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by user on 03.11.2015.
@@ -31,9 +29,50 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         Task task = getItem(position);
 
-        final View rowView = inflater.inflate(R.layout.list_item, parent, false);
+        SwipeLayout rowView = (SwipeLayout) inflater.inflate(R.layout.swipe_list_item, parent, false);
+
+        //set show mode.
+        rowView.setShowMode(SwipeLayout.ShowMode.LayDown);
+
+        //add drag edge.(If the BottomView has 'layout_gravity' attribute, this line is unnecessary)
+        //rowView.addDrag(SwipeLayout.DragEdge.Left, findViewById(R.id.bottom_wrapper));
+
+        rowView.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onClose(SwipeLayout layout) {
+                //when the SurfaceView totally cover the BottomView.
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+                //you are swiping.
+            }
+
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                //when the BottomView totally show.
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+                //when user's hand released.
+            }
+        });
+
         TextView descriptionView = (TextView) rowView.findViewById(R.id.description_view);
         TextView dateView = (TextView) rowView.findViewById(R.id.date_view);
+        TextView projectView = (TextView) rowView.findViewById(R.id.project_view);
+        TextView contextView = (TextView) rowView.findViewById(R.id.context_view);
         CheckBox cb = (CheckBox) rowView.findViewById(R.id.completion_check_box);
 
         rowView.setTag(R.layout.list_item);
@@ -42,16 +81,18 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         cb.setTag(R.id.completion_check_box);
 
         cb.setChecked(task.isComplete());
-        dateView.setText(task.getDate());
+        dateView.setText(task.getCreationDate());
         descriptionView.setText(task.getText());
-        dateView.setText(task.getDate());
+        dateView.setText(task.getCreationDate());
+        projectView.setText(task.getProjects());
+        contextView.setText(task.getContexts());
 
         cb.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                ((ListView) v.getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
+                ((ListView) v.getParent().getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
             }
         });
         rowView.setOnClickListener(new View.OnClickListener()
@@ -67,7 +108,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
             @Override
             public void onClick(View v)
             {
-                ((ListView) v.getParent().getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
+                ((ListView) v.getParent().getParent().getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
             }
         });
         descriptionView.setOnClickListener(new View.OnClickListener()
@@ -75,7 +116,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
             @Override
             public void onClick(View v)
             {
-                ((ListView) v.getParent().getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
+                ((ListView) v.getParent().getParent().getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
             }
         });
 

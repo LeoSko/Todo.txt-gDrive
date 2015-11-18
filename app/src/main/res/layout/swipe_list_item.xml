@@ -1,0 +1,13 @@
+<com.daimajia.swipe.SwipeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/TaskListView">
+    <!-- Bottom View Start-->
+    <include layout="@layout/list_item_back"/>
+    <!-- Bottom View End-->
+
+    <!-- Surface View Start -->
+    <include layout="@layout/list_item"/>
+    <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>

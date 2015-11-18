@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center">
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#CCCCCC"
+    >
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/delete_task"
+        android:enabled="true"
+        android:textColor="#000000"
         android:id="@+id/delete_task_btn"/>
 
     <Button
@@ -16,6 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/edit_task"
+        android:enabled="true"
+        android:textColor="#000000"
         android:id="@+id/edit_task_btn"/>
 
     <Button
@@ -23,5 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/complete_task"
+        android:enabled="true"
+        android:textColor="#000000"
         android:id="@+id/complete_task_btn"/>
 </LinearLayout>

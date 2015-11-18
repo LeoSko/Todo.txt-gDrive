@@ -7,8 +7,8 @@
     <string name="date">Date</string>
     <string name="project">Project</string>
     <string name="context">Context</string>
-    <string name="delete_task">Delete task</string>
-    <string name="edit_task">Edit task</string>
+    <string name="delete_task">Delete</string>
+    <string name="edit_task">Edit</string>
     <string name="complete_task">Complete task</string>
     <string-array name="list_item_actions">
         <item>Edit</item>

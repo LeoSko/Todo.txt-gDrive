@@ -23,25 +23,26 @@ public class TaskListItemClickListener implements ListView.OnItemClickListener, 
             case R.id.description_view:
             case R.id.date_view:
             case R.layout.list_item:
-                Toast.makeText(MainActivity.getAppcntxt(), "Row elements", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.getAppcntxt(), "Row elements", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.completion_check_box:
                 MainActivity.model.getAdapter().getItem(position).changeCompletion();
-                Toast.makeText(MainActivity.getAppcntxt(), "Checkbox view", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.getAppcntxt(), "Checkbox view", Toast.LENGTH_SHORT).show();
                 break;
             default:
-                Toast.makeText(MainActivity.getAppcntxt(), "Unknown view", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.getAppcntxt(), "Unknown view", Toast.LENGTH_SHORT).show();
                 break;
         }
         Task t = (Task) parent.getItemAtPosition(position);
-        Toast.makeText(MainActivity.getAppcntxt(), "SHORT" + t.getText(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.getAppcntxt(), "SHORT" + t.getText(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
     {
         Task t = (Task) parent.getItemAtPosition(position);
-        Toast.makeText(MainActivity.getAppcntxt(), "LONG" + t.getText(), Toast.LENGTH_SHORT).show();
+        
+        //Toast.makeText(MainActivity.getAppcntxt(), "LONG" + t.getText(), Toast.LENGTH_SHORT).show();
         return false;
     }
 }
