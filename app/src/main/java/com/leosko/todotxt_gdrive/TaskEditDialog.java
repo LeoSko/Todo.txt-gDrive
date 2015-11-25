@@ -46,6 +46,7 @@ public class TaskEditDialog
         final EditText input = (EditText) promptView.findViewById(R.id.editText);
         final EditText context = (EditText) promptView.findViewById(R.id.editTextContext);
         final EditText project = (EditText) promptView.findViewById(R.id.editTextProject);
+        final Spinner priority = (Spinner) promptView.findViewById(R.id.spinnerPriority);
         input.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -70,6 +71,7 @@ public class TaskEditDialog
             public void onClick(DialogInterface dialog, int id) {
                 // get user input and set it to result
                 Task nt = new Task(input.getText().toString(), context.getText().toString(), project.getText().toString());
+                nt.setPriority(priority.getSelectedItem().toString());
                 if (MainActivity.prefs.getBoolean(MainActivity.getAppcntxt().getString(R.string.pref_completionDate), true))
                 {
                     nt.setCreationDate(new SimpleDateFormat(DATE_FORMAT).format(new Date()));

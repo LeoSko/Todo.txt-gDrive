@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -73,19 +74,23 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         TextView dateView = (TextView) rowView.findViewById(R.id.date_view);
         TextView projectView = (TextView) rowView.findViewById(R.id.project_view);
         TextView contextView = (TextView) rowView.findViewById(R.id.context_view);
+        TextView priorityView = (TextView) rowView.findViewById(R.id.priority_view);
         CheckBox cb = (CheckBox) rowView.findViewById(R.id.completion_check_box);
 
         rowView.setTag(R.layout.list_item);
         descriptionView.setTag(R.id.description_view);
         dateView.setTag(R.id.date_view);
         cb.setTag(R.id.completion_check_box);
+        projectView.setTag(R.id.project_view);
+        contextView.setTag(R.id.context_view);
+        priorityView.setTag(R.id.priority_view);
 
         cb.setChecked(task.isComplete());
         dateView.setText(task.getCreationDate());
         descriptionView.setText(task.getText());
-        dateView.setText(task.getCreationDate());
         projectView.setText(task.getProjects());
         contextView.setText(task.getContexts());
+        priorityView.setText(task.getPriority());
 
         cb.setOnClickListener(new View.OnClickListener()
         {
@@ -117,6 +122,37 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
             public void onClick(View v)
             {
                 ((ListView) v.getParent().getParent().getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
+            }
+        });
+
+        //now set same hack for back items
+
+        Button deletebtn = (Button) rowView.findViewById(R.id.delete_task_btn);
+        Button editbtn = (Button) rowView.findViewById(R.id.edit_task_btn);
+        Button completebtn = (Button) rowView.findViewById(R.id.complete_task_btn);
+
+        deletebtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ((ListView) v.getParent().getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
+            }
+        });
+        editbtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ((ListView) v.getParent().getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
+            }
+        });
+        completebtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ((ListView) v.getParent().getParent().getParent()).performItemClick(v, position, 0); // Let the event be handled in onItemClick()
             }
         });
 

@@ -18,6 +18,7 @@ public class TaskListItemClickListener implements ListView.OnItemClickListener, 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         Integer viewId = (Integer) view.getTag();
+        Task task = MainActivity.model.getAdapter().getItem(position);
         switch(viewId)
         {
             case R.id.description_view:
@@ -28,6 +29,9 @@ public class TaskListItemClickListener implements ListView.OnItemClickListener, 
             case R.id.completion_check_box:
                 MainActivity.model.getAdapter().getItem(position).changeCompletion();
                 //Toast.makeText(MainActivity.getAppcntxt(), "Checkbox view", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.delete_task_btn:
+                MainActivity.model.getAdapter().remove(task);
                 break;
             default:
                 //Toast.makeText(MainActivity.getAppcntxt(), "Unknown view", Toast.LENGTH_SHORT).show();

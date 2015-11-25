@@ -15,6 +15,7 @@
         <item>Delete</item>
     </string-array>
     <string-array name="priorities">
+        <item>-</item>
         <item>A</item>
         <item>B</item>
         <item>C</item>

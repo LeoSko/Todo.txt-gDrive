@@ -9,6 +9,8 @@ public class Task
     public static final String TASK_COMPLETED_FLAG = "x ";
     public static final String TASK_HAS_PRIOR_REGEX = "\\d{4}-\\d{2}-\\d{2}";
     public static final int DATE_LENGTH = 10;
+    public static final int PRIORITY_LENGTH = 4;
+    public static final int COMPLETION_LENGTH = 2;
 
     private String text;
 
@@ -79,17 +81,13 @@ public class Task
             int start = 0;
             if (hasPriority())
             {
-                start += 4;
+                start += PRIORITY_LENGTH;
             }
             if (isComplete())
             {
-                start += 2;
+                start += COMPLETION_LENGTH;
             }
-            text = text.substring(0, start) + " " + date + " " + text.substring(start);
-            if (start == 0)
-            {
-                text = text.substring(1);
-            }
+            text = text.substring(0, start) + date + " " + text.substring(start);
         }
     }
 
@@ -139,6 +137,15 @@ public class Task
         }
     }
 
+    public String getPriority()
+    {
+        if (hasPriority())
+        {
+            return text.substring(1, 2);
+        }
+        return "";
+    }
+
     public boolean hasCreationDate()
     {
         // TODO (LeoSko) maybe check date for validity somehow?
@@ -150,11 +157,11 @@ public class Task
         int start = 0;
         if (hasPriority())
         {
-            start += 4;
+            start += PRIORITY_LENGTH;
         }
         if (isComplete())
         {
-            start += 2;
+            start += COMPLETION_LENGTH;
         }
         // not a date for sure
         if (start + DATE_LENGTH > text.length())
@@ -180,11 +187,11 @@ public class Task
         int start = 0;
         if (hasPriority())
         {
-            start += 4;
+            start += PRIORITY_LENGTH;
         }
         if (isComplete())
         {
-            start += 2;
+            start += COMPLETION_LENGTH;
         }
         if (hasCreationDate())
         {
@@ -208,17 +215,44 @@ public class Task
             int start = 0;
             if (hasPriority())
             {
-                start += 4;
+                start += PRIORITY_LENGTH;
             }
             if (isComplete())
             {
-                start += 2;
+                start += COMPLETION_LENGTH;
             }
             return text.substring(start, start + DATE_LENGTH);
         }
         else
         {
             return "";
+        }
+    }
+
+    public void setPriority(CharSequence priority)
+    {
+        if (priority.equals("-"))
+        {
+            if (hasPriority())
+            {
+                text = text.substring(4);
+            }
+            else
+            {
+                //do nothing
+                return;
+            }
+        }
+        else
+        {
+            if (hasPriority())
+            {
+                text = "(" + priority + text.substring(2);
+            }
+            else
+            {
+                text = "(" + priority + ") " + text;
+            }
         }
     }
 }
