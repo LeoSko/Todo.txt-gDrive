@@ -131,6 +131,10 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         Button editbtn = (Button) rowView.findViewById(R.id.edit_task_btn);
         Button completebtn = (Button) rowView.findViewById(R.id.complete_task_btn);
 
+        deletebtn.setTag(R.id.delete_task_btn);
+        editbtn.setTag(R.id.edit_task_btn);
+        completebtn.setTag(R.id.complete_task_btn);
+
         deletebtn.setOnClickListener(new View.OnClickListener()
         {
             @Override

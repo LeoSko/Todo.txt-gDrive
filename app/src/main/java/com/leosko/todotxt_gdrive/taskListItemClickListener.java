@@ -33,11 +33,16 @@ public class TaskListItemClickListener implements ListView.OnItemClickListener, 
             case R.id.delete_task_btn:
                 MainActivity.model.getAdapter().remove(task);
                 break;
+            case R.id.edit_task_btn:
+                break;
+            case R.id.complete_task_btn:
+                task.changeCompletion();
+                break;
             default:
                 //Toast.makeText(MainActivity.getAppcntxt(), "Unknown view", Toast.LENGTH_SHORT).show();
                 break;
         }
-        Task t = (Task) parent.getItemAtPosition(position);
+        //Task t = (Task) parent.getItemAtPosition(position);
         //Toast.makeText(MainActivity.getAppcntxt(), "SHORT" + t.getText(), Toast.LENGTH_SHORT).show();
     }
 
