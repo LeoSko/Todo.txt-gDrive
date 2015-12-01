@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Todo.txt + gDrive</string>
+    <string name="app_name" translatable="false">Todo.txt + GDrive</string>
     <string name="action_settings">Settings</string>
     <string name="priority">Priority</string>
     <string name="task_description">Task description</string>

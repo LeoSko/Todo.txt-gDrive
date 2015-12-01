@@ -8,7 +8,7 @@ public class Task
     public static final String TASK_DEFAULT_TEXT = "New task";
     public static final String TASK_COMPLETED_FLAG = "x ";
     public static final String TASK_HAS_PRIOR_REGEX = "\\d{4}-\\d{2}-\\d{2}";
-    public static final int DATE_LENGTH = 10;
+    public static final int DATE_LENGTH = 11;
     public static final int PRIORITY_LENGTH = 4;
     public static final int COMPLETION_LENGTH = 2;
 
@@ -168,7 +168,7 @@ public class Task
         {
             return false;
         }
-        String potentialDate = text.substring(start, start + DATE_LENGTH);
+        String potentialDate = text.substring(start, start + DATE_LENGTH - 1);
         return (potentialDate.matches(TASK_HAS_PRIOR_REGEX));
     }
 
@@ -254,5 +254,35 @@ public class Task
                 text = "(" + priority + ") " + text;
             }
         }
+    }
+
+    public String getRawContexts()
+    {
+        String cntt = "";
+        for (String s : getContexts().split(" @"))
+        {
+            cntt += s + " ";
+        }
+        if (!cntt.isEmpty())
+        {
+            cntt = cntt.replace("@" ,"");
+            cntt = cntt.substring(0, cntt.length() - 1);
+        }
+        return cntt;
+    }
+
+    public String getRawProjects()
+    {
+        String proj = "";
+        for (String s : getProjects().split(" +"))
+        {
+            proj += s + " ";
+        }
+        if (!proj.isEmpty())
+        {
+            proj = proj.replace("+", "");
+            proj = proj.substring(0, proj.length() - 1);
+        }
+        return proj;
     }
 }

@@ -1,5 +1,7 @@
 package com.leosko.todotxt_gdrive;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.test.TouchUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +16,13 @@ import com.leosko.todotxt_gdrive.model.Task;
  */
 public class TaskListItemClickListener implements ListView.OnItemClickListener, ListView.OnItemLongClickListener
 {
+    Context cntxt;
+
+    public TaskListItemClickListener(Context cntxt)
+    {
+        this.cntxt = cntxt;
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
@@ -24,26 +33,28 @@ public class TaskListItemClickListener implements ListView.OnItemClickListener, 
             case R.id.description_view:
             case R.id.date_view:
             case R.layout.list_item:
-                //Toast.makeText(MainActivity.getAppcntxt(), "Row elements", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.completion_check_box:
-                MainActivity.model.getAdapter().getItem(position).changeCompletion();
-                //Toast.makeText(MainActivity.getAppcntxt(), "Checkbox view", Toast.LENGTH_SHORT).show();
+                task.changeCompletion();
+                MainActivity.model.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.delete_task_btn:
                 MainActivity.model.getAdapter().remove(task);
                 break;
             case R.id.edit_task_btn:
+                TaskEditDialog ted = new TaskEditDialog(cntxt, null);
+                AlertDialog.Builder builder = ted.createTaskEditDialog(task);
+                // create an alert dialog
+                final AlertDialog alertD = builder.create();
+                alertD.show();
                 break;
             case R.id.complete_task_btn:
                 task.changeCompletion();
+                MainActivity.model.getAdapter().notifyDataSetChanged();
                 break;
             default:
-                //Toast.makeText(MainActivity.getAppcntxt(), "Unknown view", Toast.LENGTH_SHORT).show();
                 break;
         }
-        //Task t = (Task) parent.getItemAtPosition(position);
-        //Toast.makeText(MainActivity.getAppcntxt(), "SHORT" + t.getText(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

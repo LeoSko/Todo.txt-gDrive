@@ -11,11 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.daimajia.swipe.SwipeLayout;
 import com.leosko.todotxt_gdrive.model.LocalFileSync;
 import com.leosko.todotxt_gdrive.model.Model;
 
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         appcntxt = getApplicationContext();
         model = new Model();
-        tlicl = new TaskListItemClickListener();
+        tlicl = new TaskListItemClickListener(MainActivity.this);
         prefs = PreferenceManager.getDefaultSharedPreferences(appcntxt);
         try
         {
@@ -51,6 +49,8 @@ public class MainActivity extends AppCompatActivity
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setLogo(R.drawable.ic_launcher);
+        //toolbar.setNavigationIcon(R.drawable.ic_launcher);
 
         ListView taskListView = (ListView) findViewById(R.id.TaskListView);
 
@@ -67,12 +67,10 @@ public class MainActivity extends AppCompatActivity
             {
                 //Create new task
                 TaskEditDialog ted = new TaskEditDialog(MainActivity.this, null);
-                AlertDialog.Builder builder = ted.createTaskEditDialog();
+                AlertDialog.Builder builder = ted.createTaskCreationDialog();
                 // create an alert dialog
                 final AlertDialog alertD = builder.create();
                 alertD.show();
-                //Toast.makeText(appcntxt, "FAB clicks!", Toast.LENGTH_LONG).show();
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
     }

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content" android:layout_margin="2dp"
-              android:background="#FFFFFF"
+              android:background="@color/listItemDefaultForegroundBackground"
+              android:id="@+id/list_item"
     >
 
         <CheckBox
@@ -11,6 +12,7 @@
             android:id="@+id/completion_check_box"
             android:layout_margin="2dp"
             android:layout_gravity="center"
+
             android:focusable="false"
             />
 
@@ -45,7 +47,7 @@
                 android:textSize="15sp"
                 android:enabled="true"
                 android:id="@+id/priority_view"
-                android:textColor="#111100"
+                android:textColor="#000088"
                 android:layout_margin="2dp"/>
 
             <TextView
