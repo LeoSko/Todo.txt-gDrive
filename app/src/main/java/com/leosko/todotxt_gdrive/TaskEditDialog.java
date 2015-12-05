@@ -77,6 +77,7 @@ public class TaskEditDialog
                     nt.setCreationDate(new SimpleDateFormat(DATE_FORMAT).format(new Date()));
                 }
                 MainActivity.model.addTask(nt);
+                MainActivity.lfs.save();
             }
         })
 
@@ -156,6 +157,7 @@ public class TaskEditDialog
                 int oldidx = MainActivity.model.getAdapter().getPosition(t);
                 MainActivity.model.getAdapter().remove(t);
                 MainActivity.model.getAdapter().insert(nt, oldidx);
+                MainActivity.lfs.save();
             }
         })
 

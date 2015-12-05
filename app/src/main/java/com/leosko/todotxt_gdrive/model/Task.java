@@ -141,7 +141,14 @@ public class Task
     {
         if (hasPriority())
         {
-            return text.substring(1, 2);
+            if (isComplete())
+            {
+                return text.substring(3, 4);
+            }
+            else
+            {
+                return text.substring(1, 2);
+            }
         }
         return "";
     }
@@ -177,11 +184,13 @@ public class Task
         text = newStr;
     }
 
+    //returns full string of Todo.txt format
     public String getRawText()
     {
         return text;
     }
 
+    // returns just text of task
     public String getText()
     {
         int start = 0;

@@ -37,16 +37,7 @@ public class MainActivity extends AppCompatActivity
         model = new Model();
         tlicl = new TaskListItemClickListener(MainActivity.this);
         prefs = PreferenceManager.getDefaultSharedPreferences(appcntxt);
-        try
-        {
-            lfs = new LocalFileSync();
-        }
-        catch (IOException e)
-        {
-            //if we can't create file then just quit no matter what for now...
-            Toast.makeText(appcntxt, CANT_CREATE_FILE, Toast.LENGTH_LONG).show();
-            finish();
-        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setLogo(R.drawable.ic_launcher);
@@ -58,6 +49,9 @@ public class MainActivity extends AppCompatActivity
         taskListView.setAdapter(model.getAdapter());
         taskListView.setOnItemClickListener(tlicl);
         taskListView.setOnItemLongClickListener(tlicl);
+
+        lfs = new LocalFileSync();
+        lfs.load();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()

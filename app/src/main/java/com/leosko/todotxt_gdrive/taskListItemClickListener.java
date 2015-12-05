@@ -37,9 +37,11 @@ public class TaskListItemClickListener implements ListView.OnItemClickListener, 
             case R.id.completion_check_box:
                 task.changeCompletion();
                 MainActivity.model.getAdapter().notifyDataSetChanged();
+                MainActivity.lfs.save();
                 break;
             case R.id.delete_task_btn:
                 MainActivity.model.getAdapter().remove(task);
+                MainActivity.lfs.save();
                 break;
             case R.id.edit_task_btn:
                 TaskEditDialog ted = new TaskEditDialog(cntxt, null);
@@ -51,6 +53,7 @@ public class TaskListItemClickListener implements ListView.OnItemClickListener, 
             case R.id.complete_task_btn:
                 task.changeCompletion();
                 MainActivity.model.getAdapter().notifyDataSetChanged();
+                MainActivity.lfs.save();
                 break;
             default:
                 break;
