@@ -214,7 +214,11 @@ public class Task
                 res += s + " ";
             }
         }
-        return res.substring(0, res.length() - 1);
+        if (!res.isEmpty())
+        {
+            res = res.substring(0, res.length() - 1);
+        }
+        return res;
     }
 
     public String getCreationDate()
@@ -230,7 +234,7 @@ public class Task
             {
                 start += COMPLETION_LENGTH;
             }
-            return text.substring(start, start + DATE_LENGTH);
+            return text.substring(start, start + DATE_LENGTH - 1);
         }
         else
         {

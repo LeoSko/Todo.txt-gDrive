@@ -3,11 +3,14 @@ package com.leosko.todotxt_gdrive;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -35,7 +38,7 @@ public class TaskEditDialog
         this.task = t;
     }
 
-    public AlertDialog.Builder createTaskCreationDialog()
+    public AlertDialog createTaskCreationDialog()
     {
         // get *.xml view
         LayoutInflater layoutInflater = LayoutInflater.from(cntxt);
@@ -67,20 +70,7 @@ public class TaskEditDialog
 
         // setup a dialog window
         alertDialogBuilder
-                .setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // get user input and set it to result
-                Task nt = new Task(input.getText().toString(), context.getText().toString(), project.getText().toString());
-                nt.setPriority(priority.getSelectedItem().toString());
-                if (MainActivity.prefs.getBoolean(MainActivity.getAppcntxt().getString(R.string.pref_completionDate), true))
-                {
-                    nt.setCreationDate(new SimpleDateFormat(DATE_FORMAT).format(new Date()));
-                }
-                MainActivity.model.addTask(nt);
-                MainActivity.lfs.save();
-            }
-        })
-
+                .setCancelable(true).setPositiveButton("OK", null)
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int id)
@@ -88,10 +78,40 @@ public class TaskEditDialog
                         dialog.cancel();
                     }
                 });
-        return alertDialogBuilder;
+        final AlertDialog res = alertDialogBuilder.create();
+        res.setOnShowListener(new DialogInterface.OnShowListener()
+        {
+            @Override
+            public void onShow(final DialogInterface dialog)
+            {
+                Button button = res.getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        // get user input and set it to result
+                        if (input.getText().toString().trim().isEmpty())
+                        {
+                            return;
+                        }
+                        Task nt = new Task(input.getText().toString(), context.getText().toString(), project.getText().toString());
+                        nt.setPriority(priority.getSelectedItem().toString());
+                        if (MainActivity.prefs.getBoolean(MainActivity.getAppcntxt().getString(R.string.pref_completionDate), true))
+                        {
+                            nt.setCreationDate(new SimpleDateFormat(DATE_FORMAT).format(new Date()));
+                        }
+                        MainActivity.model.addTask(nt);
+                        MainActivity.lfs.save();
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        return res;
     }
 
-    public AlertDialog.Builder createTaskEditDialog(final Task t)
+    public AlertDialog createTaskEditDialog(final Task t)
     {
         // get *.xml view
         LayoutInflater layoutInflater = LayoutInflater.from(cntxt);
@@ -141,26 +161,7 @@ public class TaskEditDialog
 
         // setup a dialog window
         alertDialogBuilder
-                .setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // get user input and set it to result
-                Task nt = new Task(input.getText().toString(), context.getText().toString(), project.getText().toString());
-                nt.setPriority(priority.getSelectedItem().toString());
-                if (MainActivity.prefs.getBoolean(MainActivity.getAppcntxt().getString(R.string.pref_creationDate), true))
-                {
-                    nt.setCreationDate(t.getCreationDate());
-                }
-                if (t.isComplete())
-                {
-                    nt.changeCompletion();
-                }
-                int oldidx = MainActivity.model.getAdapter().getPosition(t);
-                MainActivity.model.getAdapter().remove(t);
-                MainActivity.model.getAdapter().insert(nt, oldidx);
-                MainActivity.lfs.save();
-            }
-        })
-
+                .setCancelable(true).setPositiveButton("OK", null)
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int id)
@@ -168,6 +169,42 @@ public class TaskEditDialog
                         dialog.cancel();
                     }
                 });
-        return alertDialogBuilder;
+        final AlertDialog res = alertDialogBuilder.create();
+        res.setOnShowListener(new DialogInterface.OnShowListener()
+        {
+            @Override
+            public void onShow(final DialogInterface dialog)
+            {
+                Button button = res.getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        // get user input and set it to result
+                        if (input.getText().toString().trim().isEmpty())
+                        {
+                            return;
+                        }
+                        Task nt = new Task(input.getText().toString(), context.getText().toString(), project.getText().toString());
+                        nt.setPriority(priority.getSelectedItem().toString());
+                        if (MainActivity.prefs.getBoolean(MainActivity.getAppcntxt().getString(R.string.pref_creationDate), true))
+                        {
+                            nt.setCreationDate(t.getCreationDate());
+                        }
+                        if (t.isComplete())
+                        {
+                            nt.changeCompletion();
+                        }
+                        int oldidx = MainActivity.model.getAdapter().getPosition(t);
+                        MainActivity.model.getAdapter().remove(t);
+                        MainActivity.model.getAdapter().insert(nt, oldidx);
+                        MainActivity.lfs.save();
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        return res;
     }
 }

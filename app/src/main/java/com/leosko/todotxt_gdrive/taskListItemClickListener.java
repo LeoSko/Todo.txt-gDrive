@@ -45,9 +45,7 @@ public class TaskListItemClickListener implements ListView.OnItemClickListener, 
                 break;
             case R.id.edit_task_btn:
                 TaskEditDialog ted = new TaskEditDialog(cntxt, null);
-                AlertDialog.Builder builder = ted.createTaskEditDialog(task);
-                // create an alert dialog
-                final AlertDialog alertD = builder.create();
+                final AlertDialog alertD = ted.createTaskEditDialog(task);
                 alertD.show();
                 break;
             case R.id.complete_task_btn:

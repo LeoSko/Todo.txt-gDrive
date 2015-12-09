@@ -61,9 +61,7 @@ public class MainActivity extends AppCompatActivity
             {
                 //Create new task
                 TaskEditDialog ted = new TaskEditDialog(MainActivity.this, null);
-                AlertDialog.Builder builder = ted.createTaskCreationDialog();
-                // create an alert dialog
-                final AlertDialog alertD = builder.create();
+                final AlertDialog alertD = ted.createTaskCreationDialog();
                 alertD.show();
             }
         });
