@@ -16,14 +16,26 @@ import com.daimajia.swipe.SwipeLayout;
 import com.leosko.todotxt_gdrive.model.Task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by user on 03.11.2015.
  */
 public class TaskListAdapter extends ArrayAdapter<Task> {
+    Comparator<Task> comparator;
 
     public TaskListAdapter(Context context, int textViewResourceId, ArrayList<Task> objects) {
         super(context, textViewResourceId, objects);
+    }
+
+    public Comparator<Task> getComparator()
+    {
+        return comparator;
+    }
+
+    public void setComparator(Comparator<Task> comparator)
+    {
+        this.comparator = comparator;
     }
 
     @Override
@@ -132,6 +144,18 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         });
 
         return rowView;
+    }
+
+    @Override
+    public void notifyDataSetChanged()
+    {
+        setNotifyOnChange(false);
+        if (comparator != null)
+        {
+            sort(comparator);
+        }
+        setNotifyOnChange(true);
+        super.notifyDataSetChanged();
     }
 
     @Override

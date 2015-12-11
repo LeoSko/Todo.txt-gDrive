@@ -11,6 +11,7 @@ public class Task
     public static final int DATE_LENGTH = 11;
     public static final int PRIORITY_LENGTH = 4;
     public static final int COMPLETION_LENGTH = 2;
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
 
     private String text;
 

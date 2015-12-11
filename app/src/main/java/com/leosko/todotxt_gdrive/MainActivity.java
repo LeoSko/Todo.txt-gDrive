@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         taskListView.setAdapter(model.getAdapter());
         taskListView.setOnItemClickListener(tlicl);
         taskListView.setOnItemLongClickListener(tlicl);
+        model.getAdapter().setComparator(TaskComparatorFactory.getTaskComparator(TaskComparatorFactory.SORT_TYPE.UNCOMPLETE_PRIORITY));
 
         lfs = new LocalFileSync();
         lfs.load();

@@ -28,7 +28,6 @@ import java.util.Date;
  */
 public class TaskEditDialog
 {
-    public static final String DATE_FORMAT = "yyyy-MM-dd";
     private Context cntxt;
     private Task task = null;
 
@@ -99,7 +98,7 @@ public class TaskEditDialog
                         nt.setPriority(priority.getSelectedItem().toString());
                         if (MainActivity.prefs.getBoolean(MainActivity.getAppcntxt().getString(R.string.pref_completionDate), true))
                         {
-                            nt.setCreationDate(new SimpleDateFormat(DATE_FORMAT).format(new Date()));
+                            nt.setCreationDate(new SimpleDateFormat(Task.DATE_FORMAT).format(new Date()));
                         }
                         MainActivity.model.addTask(nt);
                         MainActivity.lfs.save();
