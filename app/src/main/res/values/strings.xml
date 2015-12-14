@@ -45,4 +45,5 @@
     </string-array>
     <string name="pref_creationDate" translatable="false">pref_creationDate</string>
     <string name="pref_completionDate" translatable="false">pref_completionDate</string>
+    <string name="action_perform_sync">Sync with GDrive</string>
 </resources>

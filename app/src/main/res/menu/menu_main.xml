@@ -6,4 +6,8 @@
           android:title="@string/action_settings"
           android:orderInCategory="100"
           app:showAsAction="never"/>
+    <item android:id="@+id/action_perform_sync"
+        android:title="@string/action_connect_gdrive"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
 </menu>

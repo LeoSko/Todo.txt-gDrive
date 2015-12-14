@@ -2,6 +2,7 @@ package com.leosko.todotxt_gdrive;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,12 +13,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
 import com.leosko.todotxt_gdrive.model.LocalFileSync;
 import com.leosko.todotxt_gdrive.model.Model;
-
-import java.io.IOException;
+import com.leosko.todotxt_gdrive.model.RemoteFileSync;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -25,8 +26,13 @@ public class MainActivity extends AppCompatActivity
     public static Model model;
     public static LocalFileSync lfs;
     public static SharedPreferences prefs;
-    private TaskListItemClickListener tlicl;
     private static Context appcntxt;
+    private TaskListItemClickListener tlicl;
+
+    public static Context getAppcntxt()
+    {
+        return appcntxt;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -68,11 +74,6 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    public static Context getAppcntxt()
-    {
-        return appcntxt;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -93,6 +94,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings)
         {
             return true;
+        }
+        else if (id == R.id.action_perform_sync)
+        {
+            new RemoteFileSync(MainActivity.this).performSync();
         }
 
         return super.onOptionsItemSelected(item);
