@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
+import java.util.Date;
 import java.util.FormatFlagsConversionMismatchException;
 
 /**
@@ -29,6 +30,19 @@ public class LocalFileSync
 
     public LocalFileSync()
     {
+    }
+
+    public static Date lastModifiedDate()
+    {
+        File file = new File(MainActivity.getAppcntxt().getFilesDir() + "/" + TODO_FILE);
+        if (file.exists())
+        {
+            return new Date(file.lastModified());
+        }
+        else
+        {
+            return new Date(0);
+        }
     }
 
     public void load()

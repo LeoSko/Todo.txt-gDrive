@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 
+/**
+ * Created by LeoSko on 12.12.2015.
+ */
 public class TaskComparatorFactory
 {
     public enum SORT_TYPE {

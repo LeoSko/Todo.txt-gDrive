@@ -83,7 +83,7 @@ Learn how to add 2+2
         assertFalse(t1.hasCreationDate());
         assertEquals("", t1.getCreationDate());
         //current date
-        String currentDate = new SimpleDateFormat(com.leosko.todotxt_gdrive.TaskEditDialog.DATE_FORMAT).format(new Date());
+        String currentDate = new SimpleDateFormat(Task.DATE_FORMAT).format(new Date());
         t1.setCreationDate(currentDate);
         assertTrue(t1.hasCreationDate());
         assertEquals(currentDate, t1.getCreationDate());
