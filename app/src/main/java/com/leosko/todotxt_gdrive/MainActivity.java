@@ -91,11 +91,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
-            return true;
-        }
-        else if (id == R.id.action_perform_sync)
+        if (id == R.id.action_perform_sync)
         {
             new RemoteFileSync(MainActivity.this).performSync();
         }
