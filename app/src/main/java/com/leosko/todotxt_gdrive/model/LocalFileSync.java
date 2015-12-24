@@ -64,6 +64,40 @@ public class LocalFileSync
         }
     }
 
+    public static void syncFromString(String source)
+    {
+        try
+        {
+            OutputStreamWriter osw = new OutputStreamWriter(MainActivity.getAppcntxt().openFileOutput(TODO_FILE, Context.MODE_PRIVATE));
+            osw.write(source);
+            osw.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public String getRawString()
+    {
+        String s;
+        StringBuilder stringBuilder = new StringBuilder();
+        try
+        {
+            BufferedReader br = new BufferedReader(new InputStreamReader(MainActivity.getAppcntxt().openFileInput(TODO_FILE)));
+            while ((s = br.readLine()) != null)
+            {
+                stringBuilder.append(s + '\n');
+            }
+            br.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
+    }
+
     public void save()
     {
         String s;

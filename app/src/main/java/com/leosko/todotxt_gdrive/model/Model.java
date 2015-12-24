@@ -26,7 +26,6 @@ public class Model
     {
         //tasks.add(t);
         adapter.add(t);
-        MainActivity.lfs.save();
         //adapter.getView(tasks.size() - 1, View.inflate(MainActivity.getAppcntxt(), R.layout.list_item, null), null).setEnabled(true);
     }
 
