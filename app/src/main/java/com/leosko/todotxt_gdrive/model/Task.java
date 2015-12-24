@@ -75,7 +75,7 @@ public class Task
     {
         if (hasCreationDate())
         {
-            text.replace(getCreationDate(), date);
+            text = text.replace(getCreationDate(), date);
         }
         else
         {
